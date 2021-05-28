@@ -17,8 +17,7 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup(function()
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use 'wbthomason/packer.nvim' -- Packer can manage itself
   use 'VundleVim/Vundle.vim'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
@@ -26,7 +25,9 @@ require('packer').startup(function()
   use 'tpope/vim-commentary'
   use 'junegunn/goyo.vim'
   use 'junegunn/limelight.vim'
-  -- Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } -- Fuzzy matching, par 1
+  -- use 'junegunn/fzf', { 'do': { -> fzf#install() } } 
+  -- use '/usr/local/opt/fzf' -- Fuzzy matching, par 1
+  use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
   use 'junegunn/fzf.vim'                   -- Fuzzy matching, part 2
   use 'leafgarland/typescript-vim'
   use 'tpope/vim-cucumber'
@@ -210,11 +211,11 @@ vim.api.nvim_set_keymap('n', ';', ':', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('i', '<S><Del>', '<BS>', { noremap = true, silent = true })
 
 -- Terminal
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-\\><C-n><C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-\\><C-n><C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-\\><C-n><C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-\\><C-n><C-w>l', { noremap = true, silent = true })
-nvim_exec("au TermOpen * tnoremap <Esc> <C-\\><C-n>", false)
+vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-n><C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-w>l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 nvim_exec("au FileType fzf tunmap <Esc>", false)
 
 -- Highlighter
@@ -225,7 +226,7 @@ local function vsplit_vimrc()
     nvim_exec(':vsplit %MYVIMRC')
 end
 vim.api.nvim_set_keymap('n', '<leader>ev', ':vsplit $MYVIMRC<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sv', ':source $MYVIMRC<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>sv', ':luafile $MYVIMRC<cr>', { noremap = true, silent = true })
 
 vim.o.shiftround = true -- round indent to a multiple of shiftwidth
 

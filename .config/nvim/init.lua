@@ -216,7 +216,7 @@ vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-w>j', { noremap = true, sil
 vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-w>l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
-nvim_exec("au FileType fzf tunmap <Esc>", false)
+-- nvim_exec("au FileType fzf tunmap <Esc>", false)
 
 -- Highlighter
 vim.api.nvim_set_keymap('n', '<leader>l', ':MarkClear<cr>', { noremap = true, silent = true })
@@ -317,6 +317,5 @@ vim.g.tokyonight_colors = { comment = "#c14daa", fg_gutter = "#5455b5" }
 
 vim.cmd[[colorscheme tokyonight]]
 
--- Search using fzf (?)
-vim.g.FZF_DEFAULT_COMMAND = 'rg --files --hidden'
-
+-- Search using fzf with ripgrep
+vim.env.FZF_DEFAULT_COMMAND = 'rg --files'
